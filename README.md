@@ -1,127 +1,127 @@
-# DailyFlow - 智能任务管家
+# DailyFlow - Smart Task Manager
 
-> 🎯 一款简洁高效的个人任务管理工具，帮助你追踪每日任务，智能处理未完成事项。
-
----
-
-## 🌟 功能特点
-
-### 📋 任务管理
-- ✅ 快速添加任务，支持优先级和重要程度设置
-- ✅ 拖拽排序，灵活调整任务顺序
-- ✅ 点击任务查看详情，记录任务概要
-- ✅ 完成任务、编辑、删除等完整操作
-
-### 📝 子任务清单
-- ✅ 为每个任务添加多个子任务
-- ✅ 子任务支持拖拽排序
-- ✅ 子任务点击即可编辑
-- ✅ 实时显示完成进度
-
-### 🔔 智能提醒
-- ✅ 第二天自动弹出未完成任务
-- ✅ 可选择：保留到今天 / 标记完成 / 遗弃
-- ✅ 支持批量操作
-
-### 💾 数据安全
-- ✅ 本地存储，数据永不丢失
-- ✅ 支持导出/导入 JSON 备份
-- ✅ 自动保存，无需手动操作
+> 🎯 A clean and efficient personal task management tool that helps you track daily tasks and smartly handle incomplete items.
 
 ---
 
-## 🎨 界面预览
+## 🌟 Features
 
-![DailyFlow 界面](preview.png)
+### 📋 Task Management
+- ✅ Quickly add tasks with priority and importance settings
+- ✅ Drag-and-drop sorting for flexible task ordering
+- ✅ Click to view task details and record summaries
+- ✅ Complete task operations: complete, edit, delete
+
+### 📝 Subtask Lists
+- ✅ Add multiple subtasks for each task
+- ✅ Drag-and-drop sorting for subtasks
+- ✅ Click subtask text to edit inline
+- ✅ Real-time progress display
+
+### 🔔 Smart Reminders
+- ✅ Automatically show unfinished tasks the next day
+- ✅ Options: Keep / Mark Complete / Discard
+- ✅ Batch operations supported
+
+### 💾 Data Safety
+- ✅ Local storage, data never lost
+- ✅ Export/Import JSON backup
+- ✅ Auto-save, no manual operation needed
 
 ---
 
-## 🚀 快速开始
+## 🎨 Preview
 
-### 在线访问
+![DailyFlow Screenshot](preview.png)
 
-**🌐 GitHub Pages（推荐）：**
+---
+
+## 🚀 Quick Start
+
+### Online Access
+
+**🌐 GitHub Pages (Recommended):**
 👉 [https://lingbin-8801.github.io/dailyflow](https://lingbin-8801.github.io/dailyflow)
 
-**📁 本地打开：**
-直接打开 `index.html` 文件即可使用，无需任何安装。
+**📁 Open Locally:**
+Just open `index.html` in your browser, no installation needed.
 
-### 本地运行
+### Run Locally
 
 ```bash
-# 克隆项目
+# Clone the repository
 git clone https://github.com/lingbin-8801/dailyflow.git
 
-# 进入目录
+# Enter the directory
 cd dailyflow
 
-# 使用 Python 启动本地服务器（可选）
+# Start a local server (optional)
 python -m http.server 8000
 
-# 浏览器访问 http://localhost:8000
+# Open in browser: http://localhost:8000
 ```
 
 ---
 
-## 🛠️ 技术栈
+## 🛠️ Tech Stack
 
-| 技术 | 用途 |
+| Technology | Purpose |
 |---|---|
-| **原生 JavaScript (Vanilla JS)** | 核心逻辑 |
-| **CSS3 (CSS Variables)** | 样式主题 |
-| **SortableJS** | 拖拽排序 |
-| **Font Awesome 6** | 图标 |
-| **LocalStorage** | 数据存储 |
+| **Vanilla JS** | Core logic |
+| **CSS3 (CSS Variables)** | Styling & theming |
+| **SortableJS** | Drag & drop |
+| **Font Awesome 6** | Icons |
+| **LocalStorage** | Data storage |
 
 ---
 
-## 📖 使用指南
+## 📖 Usage Guide
 
-### 创建任务
-1. 在顶部输入框输入任务标题
-2. 按 Enter 或点击"添加"按钮
-3. 可选：展开"高级选项"设置优先级和重要程度
+### Create a Task
+1. Enter a task title in the top input box
+2. Press Enter or click "Add"
+3. Optional: Expand "Advanced Options" to set priority and importance
 
-### 任务详情
-- 点击任务内容区域打开详情弹窗
-- 在"任务概要"中记录详细信息
-- 在"子任务清单"中添加子任务
+### Task Details
+- Click the task content area to open the detail modal
+- Record details in the "Task Summary" section
+- Add subtasks in the "Subtask List" section
 
-### 子任务操作
-- 📌 拖拽左侧手柄调整顺序
-- ✏️ 点击文本直接编辑
-- ✅ 点击复选框标记完成
-- 🗑️ 点击 × 删除
+### Subtask Operations
+- 📌 Drag the left handle to reorder
+- ✏️ Click text to edit inline
+- ✅ Click checkbox to mark complete
+- 🗑️ Click × to delete
 
-### 处理未完成任务
-- 每天首次打开应用会显示昨日未完成任务
-- 可单独处理或批量操作
-
----
-
-## 🚀 部署到 GitHub Pages
-
-本项目已配置 GitHub Pages 自动部署，每次推送代码到 `main` 分支后，GitHub Actions 会自动构建并部署到 Pages。
-
-**设置步骤：**
-1. 打开仓库的 **Settings > Pages**
-2. 在 "Source" 中选择 **GitHub Actions**
-3. 推送代码后，等待 Actions 运行完成即可
-
-> 👉 访问地址：**https://lingbin-8801.github.io/dailyflow**
+### Handle Unfinished Tasks
+- Unfinished tasks from yesterday will pop up on first open each day
+- Handle individually or batch process
 
 ---
 
-## 🤝 贡献
+## 🚀 Deploy to GitHub Pages
 
-欢迎提交 Issue 和 Pull Request！
+This project is configured with GitHub Pages auto-deployment. Every time you push to the `main` branch, GitHub Actions will automatically build and deploy to Pages.
+
+**Setup Steps:**
+1. Go to your repo's **Settings > Pages**
+2. Select **GitHub Actions** as the source
+3. Push code and wait for the Actions workflow to finish
+
+> 👉 Visit: **https://lingbin-8801.github.io/dailyflow**
 
 ---
 
-## 📄 许可证
+## 🤝 Contributing
 
-MIT License - 欢迎自由使用和修改。
+Issues and Pull Requests are welcome!
 
 ---
 
-⭐ 如果这个项目对你有帮助，请给我一个 Star！
+## 📄 License
+
+MIT License - Free to use and modify.
+
+---
+
+⭐ If this project helps you, please give it a Star!
