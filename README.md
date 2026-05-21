@@ -38,7 +38,7 @@
 ### 本地运行
 ```bash
 # 克隆项目
-git clone https://github.com/YOUR_USERNAME/dailyflow.git
+git clone https://github.com/lingbin-8801/dailyflow.git
 
 # 进入目录
 cd dailyflow
