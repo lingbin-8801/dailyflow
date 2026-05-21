@@ -1768,24 +1768,40 @@
 
         function initSubtaskSortable() {
             const list = document.getElementById('subtaskList');
-            // 移除旧的 Sortable 实例（通过重新创建）
-            if (list._sortable) {
-                list._sortable.destroy();
+            if (!list) return;
+            
+            // 检查是否有子任务项
+            const items = list.querySelectorAll('.subtask-item');
+            if (items.length === 0) return;
+            
+            // 销毁旧的 Sortable 实例
+            if (window.subtaskSortableInstance) {
+                window.subtaskSortableInstance.destroy();
+                window.subtaskSortableInstance = null;
             }
-            list._sortable = new Sortable(list, {
+            
+            window.subtaskSortableInstance = new Sortable(list, {
                 animation: 200,
                 ghostClass: 'ghost',
                 dragClass: 'dragging',
                 handle: '.subtask-drag-handle',
+                filter: '.empty-subtasks',
+                draggable: '.subtask-item',
                 onEnd: function(evt) {
+                    // 检查是否真的移动了
+                    if (evt.oldIndex === evt.newIndex) return;
+                    
                     const task = state.tasks.find(t => t.id === currentDetailTaskId);
                     if (!task || !task.subtasks) return;
 
                     // 重新排列子任务数组
                     const [moved] = task.subtasks.splice(evt.oldIndex, 1);
                     task.subtasks.splice(evt.newIndex, 0, moved);
+                    
+                    // 保存并重新渲染
                     saveToStorage();
                     renderSubtasks(task.subtasks);
+                    showToast('子任务顺序已更新', 'success');
                 }
             });
         }
