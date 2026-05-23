@@ -968,6 +968,181 @@
             border-color: var(--primary);
         }
 
+        /* Heatmap Styles */
+        .heatmap-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .heatmap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .heatmap-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .heatmap-title i {
+            color: var(--primary);
+        }
+
+        .heatmap-legend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .heatmap-legend-item {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .heatmap-grid {
+            display: flex;
+            flex-direction: row;
+            gap: 3px;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            max-width: 100%;
+            justify-content: center;
+        }
+
+        .heatmap-row {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .heatmap-cell {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background: #EBEDF0;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .heatmap-cell:hover {
+            transform: scale(1.3);
+            z-index: 10;
+        }
+
+        .heatmap-cell.level-1 { background: #9BE9A8; }
+        .heatmap-cell.level-2 { background: #40C463; }
+        .heatmap-cell.level-3 { background: #30A14E; }
+        .heatmap-cell.level-4 { background: #216E39; }
+
+        .heatmap-months {
+            display: flex;
+            margin-top: 0.5rem;
+            padding-left: 30px;
+        }
+
+        .heatmap-month {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            min-width: 60px;
+        }
+
+        .heatmap-weekdays {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-right: 6px;
+        }
+
+        .heatmap-weekday {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            height: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            min-width: 24px;
+        }
+
+        .heatmap-tooltip {
+            position: fixed;
+            background: var(--text-primary);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.8rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 2000;
+            pointer-events: none;
+            max-width: 280px;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        .heatmap-tooltip.show {
+            opacity: 1;
+        }
+
+        .heatmap-tooltip-date {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .heatmap-tooltip-count {
+            margin-bottom: 0.5rem;
+        }
+
+        .heatmap-tooltip-tasks {
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .heatmap-tooltip-task {
+            padding: 0.25rem 0;
+            font-size: 0.75rem;
+            opacity: 0.9;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .heatmap-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .heatmap-stat {
+            text-align: center;
+        }
+
+        .heatmap-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .heatmap-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
         /* Toast */
         .toast-container {
             position: fixed;
@@ -1181,6 +1356,34 @@
             <h3>今天想完成什么？</h3>
             <p>在上方添加你的第一个任务，开始高效的一天！</p>
         </div>
+
+        <!-- Heatmap -->
+        <div class="heatmap-container" id="heatmapContainer">
+            <div class="heatmap-header">
+                <div class="heatmap-title">
+                    <i class="fas fa-fire"></i>
+                    <span>任务完成热力图</span>
+                </div>
+                <div class="heatmap-legend">
+                    <span>少</span>
+                    <div class="heatmap-legend-item" style="background: #EBEDF0"></div>
+                    <div class="heatmap-legend-item" style="background: #9BE9A8"></div>
+                    <div class="heatmap-legend-item" style="background: #40C463"></div>
+                    <div class="heatmap-legend-item" style="background: #30A14E"></div>
+                    <div class="heatmap-legend-item" style="background: #216E39"></div>
+                    <span>多</span>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <div class="heatmap-weekdays" id="heatmapWeekdays"></div>
+                <div class="heatmap-grid" id="heatmapGrid"></div>
+            </div>
+            <div class="heatmap-months" id="heatmapMonths"></div>
+            <div class="heatmap-stats" id="heatmapStats"></div>
+        </div>
+
+        <!-- Heatmap Tooltip -->
+        <div class="heatmap-tooltip" id="heatmapTooltip"></div>
 
         <!-- Footer -->
         <footer class="footer">
@@ -1428,6 +1631,7 @@
                 saveToStorage();
                 renderTasks();
                 updateStats();
+                renderHeatmap();
                 showToast('任务已完成！🎉', 'success');
             }
         }
@@ -1921,20 +2125,29 @@
             // 如果是第一次访问，不显示提醒
             if (!state.lastVisit) {
                 state.lastVisit = today;
+                state.unfinishedPromptShown = false;
                 saveToStorage();
                 return;
             }
 
-            // 如果今天已经显示过提醒，不再显示
-            if (state.unfinishedPromptShown) {
-                return;
-            }
-
-            // 如果上次访问不是昨天，也不显示
+            // 检查是否是新的一天
             const lastVisitDate = new Date(state.lastVisit);
             const todayDate = new Date(today);
             const diffDays = Math.floor((todayDate - lastVisitDate) / (1000 * 60 * 60 * 24));
 
+            // 如果是新的一天，重置提醒标记
+            if (diffDays >= 1) {
+                state.unfinishedPromptShown = false;
+            }
+
+            // 如果今天已经显示过提醒，不再显示
+            if (state.unfinishedPromptShown) {
+                state.lastVisit = today;
+                saveToStorage();
+                return;
+            }
+
+            // 如果上次访问不是昨天，只更新访问时间，不显示提醒
             if (diffDays !== 1) {
                 state.lastVisit = today;
                 saveToStorage();
@@ -1946,6 +2159,9 @@
 
             if (unfinishedTasks.length > 0) {
                 showReminderModal(unfinishedTasks);
+            } else {
+                // 没有未完成任务，标记为已显示
+                state.unfinishedPromptShown = true;
             }
 
             state.lastVisit = today;
@@ -2264,12 +2480,208 @@
             });
         }
 
+        // ==================== 热力图 ====================
+        function renderHeatmap() {
+            const grid = document.getElementById('heatmapGrid');
+            const weekdaysEl = document.getElementById('heatmapWeekdays');
+            const monthsEl = document.getElementById('heatmapMonths');
+            const statsEl = document.getElementById('heatmapStats');
+            
+            // 计算日期范围（过去6个月，更紧凑）
+            const today = new Date();
+            const endDate = new Date(today);
+            const startDate = new Date(today);
+            startDate.setMonth(startDate.getMonth() - 6);
+            startDate.setDate(startDate.getDate() - startDate.getDay()); // 从周日开始
+            
+            // 获取所有已完成的任务
+            const completedTasks = state.tasks.filter(t => t.status === 'completed' && t.completedDate);
+            
+            // 按日期分组任务
+            const tasksByDate = {};
+            completedTasks.forEach(task => {
+                const date = task.completedDate.split('T')[0];
+                if (!tasksByDate[date]) {
+                    tasksByDate[date] = [];
+                }
+                tasksByDate[date].push(task);
+            });
+            
+            // 计算最大值用于确定颜色等级
+            const maxCount = Math.max(1, ...Object.values(tasksByDate).map(t => t.length));
+            
+            // 生成网格数据
+            const weeks = [];
+            let currentDate = new Date(startDate);
+            
+            while (currentDate <= endDate) {
+                const week = [];
+                for (let day = 0; day < 7; day++) {
+                    if (currentDate <= endDate) {
+                        const dateStr = currentDate.toISOString().split('T')[0];
+                        const tasks = tasksByDate[dateStr] || [];
+                        week.push({
+                            date: dateStr,
+                            count: tasks.length,
+                            tasks: tasks,
+                            level: getLevel(tasks.length, maxCount)
+                        });
+                    }
+                    currentDate.setDate(currentDate.getDate() + 1);
+                }
+                weeks.push(week);
+            }
+            
+            // 渲染网格
+            grid.innerHTML = '';
+            weeks.forEach((week, weekIndex) => {
+                const row = document.createElement('div');
+                row.className = 'heatmap-row';
+                
+                week.forEach((day, dayIndex) => {
+                    const cell = document.createElement('div');
+                    cell.className = `heatmap-cell level-${day.level}`;
+                    cell.dataset.date = day.date;
+                    cell.dataset.count = day.count;
+                    cell.dataset.tasks = JSON.stringify(day.tasks.map(t => t.title));
+                    
+                    // 添加悬停事件
+                    cell.addEventListener('mouseenter', showHeatmapTooltip);
+                    cell.addEventListener('mouseleave', hideHeatmapTooltip);
+                    
+                    row.appendChild(cell);
+                });
+                
+                grid.appendChild(row);
+            });
+            
+            // 渲染星期标签
+            weekdaysEl.innerHTML = ['日', '一', '二', '三', '四', '五', '六']
+                .map((day, i) => `<div class="heatmap-weekday">${i % 2 === 1 ? day : ''}</div>`)
+                .join('');
+            
+            // 渲染月份标签
+            const months = [];
+            let lastMonth = -1;
+            weeks.forEach((week, weekIndex) => {
+                const firstDayOfWeek = week[0];
+                const date = new Date(firstDayOfWeek.date);
+                const month = date.getMonth();
+                
+                if (month !== lastMonth) {
+                    months.push({
+                        month: date.getMonth() + 1,
+                        week: weekIndex
+                    });
+                    lastMonth = month;
+                }
+            });
+            
+            monthsEl.innerHTML = months.map(m => 
+                `<div class="heatmap-month" style="margin-left: ${m.week === 0 ? 0 : 0}px">${m.month}月</div>`
+            ).join('');
+            
+            // 渲染统计信息
+            const totalCompleted = completedTasks.length;
+            const thisMonthTasks = completedTasks.filter(t => {
+                const date = new Date(t.completedDate);
+                return date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
+            }).length;
+            
+            const thisWeekTasks = completedTasks.filter(t => {
+                const date = new Date(t.completedDate);
+                const weekAgo = new Date(today);
+                weekAgo.setDate(weekAgo.getDate() - 7);
+                return date >= weekAgo;
+            }).length;
+            
+            statsEl.innerHTML = `
+                <div class="heatmap-stat">
+                    <div class="heatmap-stat-value">${totalCompleted}</div>
+                    <div class="heatmap-stat-label">总完成数</div>
+                </div>
+                <div class="heatmap-stat">
+                    <div class="heatmap-stat-value">${thisMonthTasks}</div>
+                    <div class="heatmap-stat-label">本月完成</div>
+                </div>
+                <div class="heatmap-stat">
+                    <div class="heatmap-stat-value">${thisWeekTasks}</div>
+                    <div class="heatmap-stat-label">本周完成</div>
+                </div>
+            `;
+        }
+        
+        function getLevel(count, max) {
+            if (count === 0) return 0;
+            if (count <= max * 0.25) return 1;
+            if (count <= max * 0.5) return 2;
+            if (count <= max * 0.75) return 3;
+            return 4;
+        }
+        
+        function showHeatmapTooltip(e) {
+            const tooltip = document.getElementById('heatmapTooltip');
+            const cell = e.target;
+            
+            const date = cell.dataset.date;
+            const count = parseInt(cell.dataset.count);
+            const tasks = JSON.parse(cell.dataset.tasks);
+            
+            const dateObj = new Date(date);
+            const dateStr = `${dateObj.getFullYear()}年${dateObj.getMonth() + 1}月${dateObj.getDate()}日`;
+            const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+            
+            let html = `<div class="heatmap-tooltip-date">${dateStr} ${weekdays[dateObj.getDay()]}</div>`;
+            
+            if (count === 0) {
+                html += `<div class="heatmap-tooltip-count">当天没有完成任务</div>`;
+            } else {
+                html += `<div class="heatmap-tooltip-count">完成 ${count} 个任务</div>`;
+                html += `<div class="heatmap-tooltip-tasks">`;
+                tasks.slice(0, 5).forEach(title => {
+                    html += `<div class="heatmap-tooltip-task">• ${escapeHtml(title)}</div>`;
+                });
+                if (tasks.length > 5) {
+                    html += `<div class="heatmap-tooltip-task">... 还有 ${tasks.length - 5} 个任务</div>`;
+                }
+                html += `</div>`;
+            }
+            
+            tooltip.innerHTML = html;
+            tooltip.classList.add('show');
+            
+            // 定位 tooltip
+            const rect = cell.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            
+            let left = rect.left + rect.width / 2 - tooltipRect.width / 2;
+            let top = rect.top - tooltipRect.height - 10;
+            
+            // 边界检测
+            if (left < 10) left = 10;
+            if (left + tooltipRect.width > window.innerWidth - 10) {
+                left = window.innerWidth - tooltipRect.width - 10;
+            }
+            if (top < 10) {
+                top = rect.bottom + 10;
+            }
+            
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+        
+        function hideHeatmapTooltip() {
+            const tooltip = document.getElementById('heatmapTooltip');
+            tooltip.classList.remove('show');
+        }
+
         // ==================== 初始化 ====================
         document.addEventListener('DOMContentLoaded', () => {
             loadFromStorage();
             updateDateDisplay();
             renderTasks();
             updateStats();
+            renderHeatmap();
             initAdvancedOptions();
             initFilters();
             initDateNav();
